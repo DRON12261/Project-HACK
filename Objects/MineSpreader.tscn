@@ -1,0 +1,99 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://addons/smoothing/smoothing_2d.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/MineSpreader.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/PlayerMech.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/RadialLight.png" type="Texture" id=4]
+[ext_resource path="res://Scripts/MineSpreaderSignal.gd" type="Script" id=5]
+[ext_resource path="res://Sprites/HP_Bar_port_empty.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/HP_Bar_port_full.png" type="Texture" id=7]
+[ext_resource path="res://Objects/ExplosionEffect.tscn" type="PackedScene" id=8]
+[ext_resource path="res://UnsadedCanvas.tres" type="Material" id=9]
+[ext_resource path="res://Objects/Mine.tscn" type="PackedScene" id=10]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 6.91132
+height = 15.6953
+
+[node name="MineSpreader" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="MineSpreader" type="KinematicBody2D" parent="." groups=[
+"minimap",
+]]
+scale = Vector2( 2, 2 )
+collision_layer = 2
+collision_mask = 7
+script = ExtResource( 2 )
+explosion_effect = ExtResource( 8 )
+mine = ExtResource( 10 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MineSpreader"]
+visible = false
+shape = SubResource( 1 )
+
+[node name="AttackTimer" type="Timer" parent="MineSpreader"]
+one_shot = true
+
+[node name="RayCast2D" type="RayCast2D" parent="MineSpreader"]
+rotation = 3.14159
+enabled = true
+cast_to = Vector2( 0, 20 )
+collision_mask = 2147483649
+
+[node name="Timer" type="Timer" parent="MineSpreader"]
+process_mode = 0
+wait_time = 0.3
+autostart = true
+
+[node name="Mine" type="Timer" parent="MineSpreader"]
+wait_time = 10.0
+autostart = true
+
+[node name="HealthBar" type="Node2D" parent="."]
+z_index = 100
+
+[node name="HealthBar" type="TextureProgress" parent="HealthBar"]
+modulate = Color( 1, 1, 1, 0.588235 )
+material = ExtResource( 9 )
+margin_left = -47.0
+margin_top = -50.0
+margin_right = 141.0
+margin_bottom = -10.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture_under = ExtResource( 6 )
+texture_progress = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Smoothing2D" type="Node2D" parent="."]
+script = ExtResource( 1 )
+target = NodePath("../MineSpreader")
+flags = 55
+
+[node name="Render" type="Node2D" parent="Smoothing2D"]
+
+[node name="Sprite" type="Sprite" parent="Smoothing2D/Render"]
+rotation = 3.14159
+scale = Vector2( 2, 2 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 16, 464, 32, 32 )
+
+[node name="Light2D" type="Light2D" parent="Smoothing2D/Render"]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
+texture_scale = 0.5
+color = Color( 0.211765, 0.00784314, 0.0509804, 1 )
+energy = 2.0
+shadow_buffer_size = 256
+
+[node name="Line2D" type="Line2D" parent="Smoothing2D/Render"]
+visible = false
+rotation = 1.5708
+z_index = 100
+points = PoolVector2Array( 0.399996, 0.499999 )
+default_color = Color( 0.960784, 0.847059, 0.0901961, 1 )
+[connection signal="timeout" from="MineSpreader/Timer" to="MineSpreader" method="_on_Timer_timeout"]
+[connection signal="timeout" from="MineSpreader/Mine" to="MineSpreader" method="_on_Mine_timeout"]

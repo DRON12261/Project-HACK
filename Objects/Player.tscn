@@ -1,0 +1,449 @@
+[gd_scene load_steps=32 format=2]
+
+[ext_resource path="res://addons/smoothing/smoothing_2d.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Camera.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/Player.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/HUDCanvas.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Sprites/PlayerMech.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/FlashLight.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/RadialLight.png" type="Texture" id=7]
+[ext_resource path="res://Sound/Shoot.ogg" type="AudioStream" id=8]
+[ext_resource path="res://Scripts/PlayerSignal.gd" type="Script" id=9]
+[ext_resource path="res://Scenes/ShopMenuCanvas.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Sprites/HP_Bar_port_empty.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/HP_Bar_port_full.png" type="Texture" id=12]
+[ext_resource path="res://Objects/Grenade.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Sound/ShotgunReload.wav" type="AudioStream" id=15]
+[ext_resource path="res://Scripts/Trail.gd" type="Script" id=18]
+[ext_resource path="res://UnsadedCanvas.tres" type="Material" id=19]
+[ext_resource path="res://Sprites/GunCooldown_Bar_port_full.png" type="Texture" id=20]
+[ext_resource path="res://Sprites/AbilityCooldown_Bar_port_full.png" type="Texture" id=21]
+[ext_resource path="res://Sprites/AbilityCooldown_Bar_port_empty.png" type="Texture" id=22]
+[ext_resource path="res://Sprites/GunCooldown_Bar_port_empty.png" type="Texture" id=23]
+[ext_resource path="res://Scenes/DeathScreenCanvas.tscn" type="PackedScene" id=24]
+[ext_resource path="res://Scenes/OptionsMenuCanvas.tscn" type="PackedScene" id=25]
+[ext_resource path="res://Scenes/PauseMenuCanvas.tscn" type="PackedScene" id=26]
+[ext_resource path="res://Scenes/WaveAnnouncerCanvas.tscn" type="PackedScene" id=27]
+[ext_resource path="res://Scenes/WaveCompleteCanvas.tscn" type="PackedScene" id=28]
+[ext_resource path="res://Scenes/HowToPlayCanvas.tscn" type="PackedScene" id=29]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 16.0
+
+[sub_resource type="CanvasItemMaterial" id=2]
+render_priority = 1
+light_mode = 1
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0.180536, 0 ), 0.0, 1.5463, 0, 0, Vector2( 1, 0.466981 ), -0.0550564, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=4]
+_data = [ Vector2( 0, 0.514151 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CanvasItemMaterial" id=5]
+light_mode = 1
+
+[node name="Player" type="Node2D"]
+script = ExtResource( 9 )
+
+[node name="Player" type="KinematicBody2D" parent="."]
+collision_mask = 17
+script = ExtResource( 3 )
+grenade = ExtResource( 13 )
+
+[node name="CollisionShapeLegs" type="CollisionShape2D" parent="Player"]
+visible = false
+rotation = 1.5708
+scale = Vector2( 2, 2 )
+shape = SubResource( 1 )
+
+[node name="Pivot" type="Node2D" parent="Player"]
+position = Vector2( 30, 0 )
+rotation = 1.5708
+scale = Vector2( 2, 2 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player/Pivot"]
+stream = ExtResource( 8 )
+volume_db = 10.0
+pitch_scale = 0.8
+attenuation = 0.999998
+bus = "SFX"
+
+[node name="Light2D" type="Light2D" parent="Player/Pivot"]
+enabled = false
+texture = ExtResource( 7 )
+offset = Vector2( 0, -30 )
+texture_scale = 0.5
+color = Color( 1, 0.87451, 0.447059, 1 )
+shadow_enabled = true
+shadow_buffer_size = 256
+
+[node name="Timer" type="Timer" parent="Player/Pivot"]
+wait_time = 0.05
+one_shot = true
+
+[node name="SingleShootRay" type="RayCast2D" parent="Player/Pivot"]
+rotation = 3.14159
+enabled = true
+cast_to = Vector2( 0, 2000 )
+collision_mask = 10
+
+[node name="Line2D" type="Line2D" parent="Player/Pivot/SingleShootRay"]
+visible = false
+light_mask = 2
+material = SubResource( 2 )
+points = PoolVector2Array( 0, 0, 0, 200 )
+width = 2.0
+width_curve = SubResource( 3 )
+default_color = Color( 1, 0.811765, 0.611765, 0.705882 )
+antialiased = true
+
+[node name="Timer" type="Timer" parent="Player/Pivot/SingleShootRay"]
+wait_time = 0.1
+one_shot = true
+
+[node name="BurstShootRay" type="RayCast2D" parent="Player/Pivot"]
+rotation = 3.14159
+enabled = true
+cast_to = Vector2( 0, 1000 )
+collision_mask = 10
+
+[node name="Line2D" type="Line2D" parent="Player/Pivot/BurstShootRay"]
+visible = false
+light_mask = 2
+material = SubResource( 2 )
+points = PoolVector2Array( 0, 0, 0, 200 )
+width = 2.0
+width_curve = SubResource( 3 )
+default_color = Color( 1, 0.811765, 0.611765, 0.705882 )
+antialiased = true
+
+[node name="Timer" type="Timer" parent="Player/Pivot/BurstShootRay"]
+wait_time = 0.1
+one_shot = true
+
+[node name="ShootgunShootRays" type="RayCast2D" parent="Player/Pivot"]
+
+[node name="Ray1" type="RayCast2D" parent="Player/Pivot/ShootgunShootRays"]
+rotation = 3.14159
+enabled = true
+cast_to = Vector2( 0, 200 )
+collision_mask = 10
+
+[node name="Line2D" type="Line2D" parent="Player/Pivot/ShootgunShootRays/Ray1"]
+visible = false
+light_mask = 2
+material = SubResource( 2 )
+points = PoolVector2Array( 0, 0, 0, 200 )
+width = 2.0
+width_curve = SubResource( 3 )
+default_color = Color( 1, 0.811765, 0.611765, 0.705882 )
+antialiased = true
+
+[node name="Timer" type="Timer" parent="Player/Pivot/ShootgunShootRays/Ray1"]
+wait_time = 0.1
+one_shot = true
+
+[node name="Ray2" type="RayCast2D" parent="Player/Pivot/ShootgunShootRays"]
+rotation = 3.14159
+enabled = true
+cast_to = Vector2( 0, 200 )
+collision_mask = 10
+
+[node name="Line2D" type="Line2D" parent="Player/Pivot/ShootgunShootRays/Ray2"]
+visible = false
+light_mask = 2
+material = SubResource( 2 )
+points = PoolVector2Array( 0, 0, 0, 200 )
+width = 2.0
+width_curve = SubResource( 3 )
+default_color = Color( 1, 0.811765, 0.611765, 0.705882 )
+antialiased = true
+
+[node name="Timer" type="Timer" parent="Player/Pivot/ShootgunShootRays/Ray2"]
+wait_time = 0.1
+one_shot = true
+
+[node name="Ray3" type="RayCast2D" parent="Player/Pivot/ShootgunShootRays"]
+rotation = 3.14159
+enabled = true
+cast_to = Vector2( 0, 200 )
+collision_mask = 10
+
+[node name="Line2D" type="Line2D" parent="Player/Pivot/ShootgunShootRays/Ray3"]
+visible = false
+light_mask = 2
+material = SubResource( 2 )
+points = PoolVector2Array( 0, 0, 0, 200 )
+width = 2.0
+width_curve = SubResource( 3 )
+default_color = Color( 1, 0.811765, 0.611765, 0.705882 )
+antialiased = true
+
+[node name="Timer" type="Timer" parent="Player/Pivot/ShootgunShootRays/Ray3"]
+wait_time = 0.1
+one_shot = true
+
+[node name="Ray4" type="RayCast2D" parent="Player/Pivot/ShootgunShootRays"]
+rotation = 3.14159
+enabled = true
+cast_to = Vector2( 0, 200 )
+collision_mask = 10
+
+[node name="Line2D" type="Line2D" parent="Player/Pivot/ShootgunShootRays/Ray4"]
+visible = false
+light_mask = 2
+material = SubResource( 2 )
+points = PoolVector2Array( 0, 0, 0, 200 )
+width = 2.0
+width_curve = SubResource( 3 )
+default_color = Color( 1, 0.811765, 0.611765, 0.705882 )
+antialiased = true
+
+[node name="Timer" type="Timer" parent="Player/Pivot/ShootgunShootRays/Ray4"]
+wait_time = 0.1
+one_shot = true
+
+[node name="Ray5" type="RayCast2D" parent="Player/Pivot/ShootgunShootRays"]
+rotation = 3.14159
+enabled = true
+cast_to = Vector2( 0, 200 )
+collision_mask = 10
+
+[node name="Line2D" type="Line2D" parent="Player/Pivot/ShootgunShootRays/Ray5"]
+visible = false
+light_mask = 2
+material = SubResource( 2 )
+points = PoolVector2Array( 0, 0, 0, 200 )
+width = 2.0
+width_curve = SubResource( 3 )
+default_color = Color( 1, 0.811765, 0.611765, 0.705882 )
+antialiased = true
+
+[node name="Timer" type="Timer" parent="Player/Pivot/ShootgunShootRays/Ray5"]
+wait_time = 0.1
+one_shot = true
+
+[node name="Ray6" type="RayCast2D" parent="Player/Pivot/ShootgunShootRays"]
+rotation = 3.14159
+enabled = true
+cast_to = Vector2( 0, 200 )
+collision_mask = 10
+
+[node name="Line2D" type="Line2D" parent="Player/Pivot/ShootgunShootRays/Ray6"]
+visible = false
+light_mask = 2
+material = SubResource( 2 )
+points = PoolVector2Array( 0, 0, 0, 200 )
+width = 2.0
+width_curve = SubResource( 3 )
+default_color = Color( 1, 0.811765, 0.611765, 0.705882 )
+antialiased = true
+
+[node name="Timer" type="Timer" parent="Player/Pivot/ShootgunShootRays/Ray6"]
+wait_time = 0.1
+one_shot = true
+
+[node name="HUDCanvas" parent="Player" instance=ExtResource( 4 )]
+follow_viewport_enable = false
+
+[node name="WaveAnnouncerCanvas" parent="Player" instance=ExtResource( 27 )]
+
+[node name="WaveCompleteCanvas" parent="Player" instance=ExtResource( 28 )]
+
+[node name="ShopMenuCanvas" parent="Player" instance=ExtResource( 10 )]
+
+[node name="HowToPlayCanvas" parent="Player" instance=ExtResource( 29 )]
+layer = 2
+
+[node name="OptionsMenuCanvas" parent="Player" instance=ExtResource( 25 )]
+pause_mode = 2
+layer = 2
+
+[node name="PauseMenuCanvas" parent="Player" instance=ExtResource( 26 )]
+pause_mode = 2
+
+[node name="DeathScreenCanvas" parent="Player" instance=ExtResource( 24 )]
+
+[node name="ShieldCoolDown" type="Timer" parent="Player"]
+wait_time = 10.0
+one_shot = true
+
+[node name="DashCoolDown" type="Timer" parent="Player"]
+wait_time = 5.0
+one_shot = true
+
+[node name="GrenadeCoolDown" type="Timer" parent="Player"]
+wait_time = 10.0
+one_shot = true
+
+[node name="SingleShootCoolDown" type="Timer" parent="Player"]
+wait_time = 0.5
+one_shot = true
+
+[node name="BurstShootCoolDown" type="Timer" parent="Player"]
+one_shot = true
+
+[node name="ShotgunShootCoolDown" type="Timer" parent="Player"]
+one_shot = true
+
+[node name="BurstTimer" type="Timer" parent="Player"]
+wait_time = 0.1
+one_shot = true
+
+[node name="DashTimer" type="Timer" parent="Player"]
+wait_time = 0.5
+one_shot = true
+
+[node name="ShieldTimer" type="Timer" parent="Player"]
+wait_time = 1.5
+one_shot = true
+
+[node name="ShotgunReloadTimer" type="Timer" parent="Player"]
+wait_time = 0.3
+one_shot = true
+
+[node name="ShotgunReload" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource( 15 )
+volume_db = -8.0
+bus = "SFX"
+
+[node name="Shield" type="AudioStreamPlayer2D" parent="Player"]
+bus = "SFX"
+
+[node name="Dash" type="AudioStreamPlayer2D" parent="Player"]
+bus = "SFX"
+
+[node name="Lose" type="AudioStreamPlayer" parent="Player"]
+volume_db = -5.0
+bus = "SFX"
+
+[node name="Smoothing2D" type="Node2D" parent="."]
+script = ExtResource( 1 )
+target = NodePath("../Player")
+flags = 63
+
+[node name="Body" type="Sprite" parent="Smoothing2D"]
+rotation = 1.5708
+scale = Vector2( 2, 2 )
+z_index = 2
+texture = ExtResource( 5 )
+region_enabled = true
+region_rect = Rect2( 64, 0, 64, 64 )
+
+[node name="Light2D" type="Light2D" parent="Smoothing2D/Body"]
+rotation = -1.5708
+scale = Vector2( 1.2, 1 )
+texture = ExtResource( 6 )
+offset = Vector2( 156, 0 )
+color = Color( 0.980392, 0.984314, 0.992157, 1 )
+shadow_enabled = true
+shadow_buffer_size = 256
+shadow_filter_smooth = 5.0
+
+[node name="Trail2D" type="Line2D" parent="Smoothing2D/Body"]
+visible = false
+show_behind_parent = true
+material = ExtResource( 19 )
+z_index = 1
+width = 25.0
+width_curve = SubResource( 4 )
+default_color = Color( 0.717647, 0.764706, 1, 1 )
+script = ExtResource( 18 )
+trail_length = 100
+auto_z_index = false
+
+[node name="Legs" type="Sprite" parent="Smoothing2D"]
+rotation = 1.5708
+scale = Vector2( 2, 2 )
+z_index = -1
+texture = ExtResource( 5 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 64, 64 )
+
+[node name="Light2D" type="Light2D" parent="Smoothing2D"]
+texture = ExtResource( 7 )
+color = Color( 0.372549, 0.658824, 0.992157, 1 )
+shadow_enabled = true
+shadow_buffer_size = 256
+
+[node name="Camera2D" type="Camera2D" parent="Smoothing2D"]
+current = true
+smoothing_enabled = true
+drag_margin_left = 0.7
+drag_margin_top = 0.7
+drag_margin_right = 0.7
+drag_margin_bottom = 0.7
+editor_draw_drag_margin = true
+script = ExtResource( 2 )
+target = NodePath("../Body")
+
+[node name="Shield" type="Sprite" parent="Smoothing2D"]
+visible = false
+scale = Vector2( 2, 2 )
+texture = ExtResource( 5 )
+region_enabled = true
+region_rect = Rect2( 64, 64, 64, 64 )
+
+[node name="LevelTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="Bars" type="Node2D" parent="."]
+z_index = 100
+
+[node name="HealthBar" type="TextureProgress" parent="Bars"]
+modulate = Color( 1, 1, 1, 0.784314 )
+material = SubResource( 5 )
+margin_left = -47.0
+margin_top = -60.0
+margin_right = 141.0
+margin_bottom = -20.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture_under = ExtResource( 11 )
+texture_progress = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GunCooldownBar" type="TextureProgress" parent="Bars"]
+material = ExtResource( 19 )
+margin_left = -34.0
+margin_top = -65.0
+margin_right = 100.0
+margin_bottom = -25.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture_under = ExtResource( 23 )
+texture_progress = ExtResource( 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AbilityCooldownBar" type="TextureProgress" parent="Bars"]
+material = ExtResource( 19 )
+margin_left = -34.0
+margin_top = -45.0
+margin_right = 100.0
+margin_bottom = -5.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture_under = ExtResource( 22 )
+texture_progress = ExtResource( 21 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="fired_shot" from="Player" to="." method="_on_Player_fired_shot"]
+[connection signal="timeout" from="Player/Pivot/SingleShootRay/Timer" to="Player" method="_on_Timer_timeout"]
+[connection signal="timeout" from="Player/Pivot/BurstShootRay/Timer" to="Player" method="_on_Timer_timeout"]
+[connection signal="timeout" from="Player/Pivot/ShootgunShootRays/Ray1/Timer" to="Player" method="_on_Timer_timeout"]
+[connection signal="timeout" from="Player/Pivot/ShootgunShootRays/Ray2/Timer" to="Player" method="_on_Timer_timeout"]
+[connection signal="timeout" from="Player/Pivot/ShootgunShootRays/Ray3/Timer" to="Player" method="_on_Timer_timeout"]
+[connection signal="timeout" from="Player/Pivot/ShootgunShootRays/Ray4/Timer" to="Player" method="_on_Timer_timeout"]
+[connection signal="timeout" from="Player/Pivot/ShootgunShootRays/Ray5/Timer" to="Player" method="_on_Timer_timeout"]
+[connection signal="timeout" from="Player/Pivot/ShootgunShootRays/Ray6/Timer" to="Player" method="_on_Timer_timeout"]
+[connection signal="animation_finished" from="Player/WaveAnnouncerCanvas" to="." method="_on_WaveAnnouncerCanvas_animation_finished"]
+[connection signal="animation_started" from="Player/WaveAnnouncerCanvas" to="Player" method="_on_WaveAnnouncerCanvas_animation_started"]
+[connection signal="animation_finished" from="Player/WaveCompleteCanvas" to="." method="_on_WaveCompleteCanvas_animation_finished"]
+[connection signal="timeout" from="Player/BurstTimer" to="Player" method="_on_BurstTimer_timeout"]
+[connection signal="timeout" from="Player/DashTimer" to="Player" method="_on_DashTimer_timeout"]
+[connection signal="timeout" from="Player/ShieldTimer" to="Player" method="_on_ShieldTimer_timeout"]
+[connection signal="timeout" from="Player/ShotgunReloadTimer" to="Player" method="_on_ShotgunReloadTimer_timeout"]
+[connection signal="timeout" from="LevelTimer" to="Player" method="_on_LevelTimer_timeout"]

@@ -1,0 +1,70 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Objects/ShootParticle.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/Map.gd" type="Script" id=2]
+[ext_resource path="res://Tiles/LabWall.tres" type="TileSet" id=3]
+[ext_resource path="res://Tiles/LabGround.tres" type="TileSet" id=4]
+[ext_resource path="res://Objects/ShockSphere.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Objects/BikeKamikaze.tscn" type="PackedScene" id=7]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+
+[node name="MapTemplate" type="Node2D"]
+script = ExtResource( 2 )
+hit_effect = ExtResource( 1 )
+bike_kamikaze = ExtResource( 7 )
+shock_sphere = ExtResource( 6 )
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 0.25098, 0.278431, 0.333333, 1 )
+
+[node name="Navigation2D" type="Navigation2D" parent="."]
+
+[node name="Ground" type="TileMap" parent="."]
+material = SubResource( 1 )
+scale = Vector2( 2, 2 )
+z_index = -10
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 32, 32 )
+format = 1
+
+[node name="Wall" type="TileMap" parent="."]
+scale = Vector2( 2, 2 )
+z_index = 10
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 8
+collision_mask = 7
+format = 1
+
+[node name="ShockSpheres" type="Node2D" parent="."]
+
+[node name="BikeKamikazes" type="Node2D" parent="."]
+
+[node name="LaserSpheres" type="Node2D" parent="."]
+
+[node name="MineSpreaders" type="Node2D" parent="."]
+
+[node name="Paths" type="Node2D" parent="."]
+
+[node name="Lights" type="Node2D" parent="."]
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="SpawnTonnels" type="Node2D" parent="."]
+
+[node name="Waypoints" type="Node2D" parent="."]
+
+[node name="Mines" type="Node2D" parent="."]
+
+[node name="SpawnTimer" type="Timer" parent="."]
+pause_mode = 1
+wait_time = 0.2
+autostart = true
+
+[node name="WavePause" type="Timer" parent="."]
+pause_mode = 1
+wait_time = 20.0
+one_shot = true
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
+[connection signal="timeout" from="WavePause" to="." method="_on_WavePause_timeout"]

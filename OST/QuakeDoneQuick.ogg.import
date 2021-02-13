@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/QuakeDoneQuick.ogg-46d151ddea222105d4731ea58f8fbe58.oggstr"
+
+[deps]
+
+source_file="res://OST/QuakeDoneQuick.ogg"
+dest_files=[ "res://.import/QuakeDoneQuick.ogg-46d151ddea222105d4731ea58f8fbe58.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

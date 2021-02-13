@@ -1,0 +1,110 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Sprites/PlayerMech.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/BigMovedWall.gd" type="Script" id=2]
+[ext_resource path="res://addons/smoothing/smoothing_2d.gd" type="Script" id=3]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+light_mode = 1
+
+[sub_resource type="PhysicsMaterial" id=2]
+rough = true
+bounce = 1.0
+absorbent = true
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
+points = PoolVector2Array( -24, 8, -24, -8, -8, -24, 8, -24, 24, -8, 24, 8, 8, 24, -8, 24 )
+
+[sub_resource type="OccluderPolygon2D" id=4]
+polygon = PoolVector2Array( -24, -8, -8, -24, 8, -24, 24, -8, 24, 8, 8, 24, -8, 24, -24, 8 )
+
+[node name="BigMovedWall" type="Node2D"]
+
+[node name="BigMovedWall" type="StaticBody2D" parent="."]
+material = SubResource( 1 )
+scale = Vector2( 2, 2 )
+collision_layer = 8
+collision_mask = 7
+constant_linear_velocity = Vector2( 100, 100 )
+constant_angular_velocity = 100.0
+physics_material_override = SubResource( 2 )
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BigMovedWall"]
+shape = SubResource( 3 )
+
+[node name="Smoothing2D" type="Node2D" parent="."]
+script = ExtResource( 3 )
+target = NodePath("../BigMovedWall")
+flags = 55
+
+[node name="Node2D" type="Node2D" parent="Smoothing2D"]
+use_parent_material = true
+scale = Vector2( 2, 2 )
+z_index = 10
+
+[node name="UL" type="Sprite" parent="Smoothing2D/Node2D"]
+use_parent_material = true
+position = Vector2( -16, -16 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 32, 256, 16, 16 )
+
+[node name="U" type="Sprite" parent="Smoothing2D/Node2D"]
+use_parent_material = true
+position = Vector2( 0, -16 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 16, 256, 16, 16 )
+
+[node name="UR" type="Sprite" parent="Smoothing2D/Node2D"]
+use_parent_material = true
+position = Vector2( 16, -16 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 48, 256, 16, 16 )
+
+[node name="CL" type="Sprite" parent="Smoothing2D/Node2D"]
+use_parent_material = true
+position = Vector2( -16, 0 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 16, 272, 16, 16 )
+
+[node name="C" type="Sprite" parent="Smoothing2D/Node2D"]
+use_parent_material = true
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 320, 16, 16 )
+
+[node name="CR" type="Sprite" parent="Smoothing2D/Node2D"]
+use_parent_material = true
+position = Vector2( 16, 0 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 272, 16, 16 )
+
+[node name="DL" type="Sprite" parent="Smoothing2D/Node2D"]
+use_parent_material = true
+position = Vector2( -16, 16 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 32, 272, 16, 16 )
+
+[node name="D" type="Sprite" parent="Smoothing2D/Node2D"]
+use_parent_material = true
+position = Vector2( 0, 16 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 256, 16, 16 )
+
+[node name="DR" type="Sprite" parent="Smoothing2D/Node2D"]
+use_parent_material = true
+position = Vector2( 16, 16 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 48, 272, 16, 16 )
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Smoothing2D"]
+scale = Vector2( 2, 2 )
+occluder = SubResource( 4 )

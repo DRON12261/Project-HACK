@@ -1,0 +1,112 @@
+keys,en,ru
+HEALTH,Health,Здоровье
+SCORE,SCORE,СЧЕТ
+FPS,FPS,FPS
+TIME,TIME,ВРЕМЯ
+START_GAME,Start Game,Начать игру
+OPTIONS,Options,Опции
+ABOUT,About game,Об игре
+EXIT_GAME,Exit,Выход
+DEAD_SCREEN,YOU DIED,ВЫ МЕРТВЫ
+RESTART_LABEL,Press F9 to restart level,Нажмите F9 для рестарта уровня
+FULLSCREEN,Fullscreen,На весь экран
+SFX_V,SFX volume,Громкость эффектов
+OST_V,Music volume,Громкость музыки
+BACK,Back,Назад
+LANG,Language,Язык
+LANG_RU,Russian,Russian
+LANG_EN,English,English
+ABOUT_1,This game was designed for the Two Weeks Game: GAMEOVER,Игра была разработана для Two Weeks Game: GAMEOVER
+ABOUT_2,"Project HACK is a top-down survival shooter game in which you must survive as long as possible in the harsh arenas of a secret military research complex. You play as a pilot of a special mech, who passes his last test before entering the real battlefield. Prove your professionalism and skill by showing that THEM was locked up with you, and not vice versa...","Project HACK - игра жанра top-down survival shooter,  в которой вам необходимо продержаться как можно дольше на суровых аренах секретного военного исследовательского комплекса. Вы играете за пилота специального меха, который проходит своё последнее испытание перед выходом на реальное поле боя. Докажите свои проффессионализм и мастерство, показав что это ИХ заперли с вами, а не наоборот..."
+ABOUT_3,Developed the game DRON12261 (Skochko Andrey) with the help of Andrey Alekseenko,Разработал игру DRON12261 (Скочко Андрей) при помощи Андрея Алексеенко
+ABOUT_4,Thanks for playing!,"Спасибо за то, что поиграли!"
+ABOUT_5,"My email: andrejskocko@gmail.com","Моя почта: andrejskocko@gmail.com"
+UPGRADE,Upgrade,Апгрейд
+ABILITY,Ability,Умения
+EXIT_SHOP,Exit shop,Выйти из магазина
+HEALTH_UP,Maximum health,Макс. здоровье
+SPEED_UP,Speed,Скорость
+DAMAGE_UP,Damage,Урон
+MONEY_UP,Money drop,Выпадение монет
+HEAL_UP,Healing from kills,Лечение с убийств
+SINGLE,Single shot,Одиночный выстрел
+BURST,Burst shot,Очередь
+SHOTGUN,Shotgun shot,Дробовик
+SHIELD,Shield,Щит
+SHIELD_U,SHIELD,ЩИТ
+DASH,Dash,Рывок
+DASH_U,DASH,РЫВОК
+GRENADE,Grenade,Граната
+GRENADE_U,GRENADE,ГРАНАТА
+KILLS,KILLS,УБИЙСТВА
+WAVES,WAVES,ВОЛНЫ
+MONEYS,TOTAL MONEYS,ВСЕГО МОНЕТ
+RESTART,RESTART,ПЕРЕЗАПУСК
+TO_MENU,MAIN MENU,В МЕНЮ
+PAUSE,PAUSE,ПАУЗА
+RESUME_GAME,Resume game,Продолжить игру
+SAVE_GAME,Save game,Сохранить игру
+RESTART_MENU,Restart,Перезапуск
+WAVE,WAVE,ВОЛНА
+PRESS_START,Press ENTER or F1 to start wave,Нажмите ENTER или F1 для начала волны
+PRESS_SHOP,Press TAB to open shop,"Нажмите TAB, чтобы открыть магазин"
+COMPLETE,COMPLETE,ПРОЙДЕНА
+WAVE_MODIFICATOR, WAVE MODIFICATOR,МОДИФИКАТОР ВОЛНЫ
+WAVE_MOD_EMPTY,WITHOUT MODIFICATOR,БЕЗ МОДИФИКАТОРА
+WAVE_MOD_1,X2 ENEMIES DAMAGE,Х2 УРОН ВРАГОВ
+WAVE_MOD_2,X1.5 ENEMIES SPEED,Х1.5 СКОРОСТЬ ВРАГОВ
+WAVE_MOD_3,X2 ENEMIES HEALTH,Х2 ЗДОРОВЬЕ ВРАГОВ
+WAVE_MOD_4,NO LIGHT!,НЕТ СВЕТА!
+WAVE_MOD_5,X2 WALLS SPEED,Х2 СКОРОСТЬ СТЕН
+WAVE_MOD_6,X2 ENEMY COUNT,Х2 КОЛИЧЕСТВО ВРАГОВ
+WAVE_MOD_7,WE NEED MORE GOLD!,НАМ НУЖНО БОЛЬШЕ ЗОЛОТА!
+SINGLE_SHOOT_TIP,"One powerful and extremely accurate shot. Normal rate of fire.","Один мощный и крайне точный выстрел. Нормальная скорострельность."
+BURST_SHOOT_TIP,"A burst of five shots with a small spread. The damage of each shot is weaker than a single one.","Очередь из пяти выстрелов с небольшим разбросом. Урон каждого выстрела слабее одиночного."
+SHOTGUN_SHOOT_TIP,"Shotgun. Six bullets with limited range and slightly less power than a single one.","Дробовик. Шесть пуль с ограниченной дальностью и немного меньшей мощностью, чем одиночный."
+SHIELD_TIP,"Releases a shield for 1.5 seconds, fully protecting against damage. The recovery time is 10 seconds.","Выпускает щит на 1.5 секунды, полностью защищающий от урона. Время восстановления - 10 секунд."
+DASH_TIP,"Dash towards the sight. The recovery time is 5 seconds.","Производит рывок в сторону прицела. Время восстановления - 5 секунд."
+GRENADE_TIP,"Throws a grenade towards the scope, producing a powerful explosion. The recovery time is 10 seconds.","Выбрасывает гранату в сторону прицела, производящую мощный взрыв. Время восстановления - 10 секунд."
+DEATH_SCREEN_TIP_0,"Try to find an advantageous position before the start of the wave.","Старайтесь выбирать выгодную позицию перед началом волны."
+DEATH_SCREEN_TIP_1,"Try to evenly pump everything in the store.","Старайтесь равномерно прокачивать все в магазине."
+DEATH_SCREEN_TIP_2,"Bikes-kamikazes do quite a lot of damage when caught up. Kill them first.","Байки-камикадзе наносят довольно большой урон, когда нагонят. Убивайте их первыми."
+DEATH_SCREEN_TIP_3,"Shock Spheres are unlikely to dash directly at the player. Use it wisely.","Шоковые сферы с малой вероятностью сделают рывок прямо в игрока. Используйте это с умом."
+DEATH_SCREEN_TIP_4,"Moving walls can be used to your advantage. The main thing is not to fall under them yourself.","Движущиеся стены можно использовать себе во благо. Главное - сами не попадайте под них."
+DEATH_SCREEN_TIP_5,"Modificators, while strengthening enemies, also weaken them in some way.","Модификаторы, усиливая врагов, также их в чем-то ослабляют."
+DEATH_SCREEN_TIP_6,"Try to combine skills with shooting and calculate their cooldown.","Старайтесь комбинировать умения со стрельбой и просчитывать их время восстановления."
+DEATH_SCREEN_TIP_7,"Try to keep moving. If you stop, you are probably a dead body.","Старайтесь постоянно двигаться. Если остановились - вероятно, вы труп."
+DEATH_SCREEN_TIP_8,"Nobody limited you in ammo. Shoot as much as you like.","Никто вас не ограничил в патронах. Стреляйте столько, сколько хотите."
+DEATH_SCREEN_TIP_9,"It is worth reading the description of the game in the menu if you have not already done so.","Стоит ознакомится с описанием игры в меню, если вы этого еще не сделали."
+DEATH_SCREEN_TIP_10,"During the dash, you are invulnerable. This avoids laser damage.","Во время рывка вы неуязвимы. С помощью этого можно избежать урона от лазера."
+DEATH_SCREEN_TIP_11,"The last ones left, laser orbs and mine spreaders fall into the berserker.","Оставшись последними, лазерные сферы и разбрасыватели мин впадают в берсерк."
+DEATH_SCREEN_TIP_12,"With the help of grenades, you can destroy mines.","С помощью гранат можно уничтожать мины."
+DEATH_SCREEN_TIP_13,"It is not worth saving up coins, as prices will rise in price after the next wave.","Не стоит копить монеты, так как цены после следующей волны подорожают."
+DEATH_SCREEN_TIP_14,"If you see that you are about to be squeezed, a dash can be your salvation.","Если вы видите, что вас вот-вот зажмут - вашим спасением может стать рывок."
+HOW_TO_PLAY,How to play,Как играть
+LEVEL_SELECT,Select Arena:,Выбрать Арену:
+DIFFICULTY_SELECT,Difficulty select:,Уровень сложности:
+DIF_1,"I’m young to die","Я молод, чтобы умереть"
+DIF_2,"Hey, not too rough","Эй, не так грубо"
+DIF_3,"Hurt me plenty","Сделай мне больно"
+DIF_4,"Ultra-Violence","Ультра-насилие"
+DIF_5,"Nightmare","Кошмар"
+DIF_6,"YOU ARE DEAD","ТЫ ТРУП"
+HTP_0,"A little about the rules of the game.","Немного о правилах игры."
+HTP_1,"Controls:","Управление:"
+HTP_2,"WASD - move","WASD - перемещение"
+HTP_3,"LMB - shooting","ЛКМ - стрельба"
+HTP_4,"RMB - ability","ПКМ - умение"
+HTP_5,"TAB - shop","TAB - магазин"
+HTP_6,"ENTER or F1 - premature start of the wave","ENTER или F1 - преждевременный старт волны"
+HTP_7,"F9 - quick restart of the game (with a complete reset of progress in the arena)","F9 - быстрый рестарт игры (со полным сбросом прогресса на арене)"
+HTP_8,"In the game, you need to defeat the waves of enemies on the way. Between waves you have 60 seconds, for which you can buy upgrades in the store [TAB] and there select the shooting mode [LMB] and skills [RMB]. The shop is only available between waves. During a wave, a modifier can be applied with a random probability. The modifier can increase the damage of enemies, their speed, or completely turn off the light for arena. By strengthening enemies, modifiers also weaken them in some way. As soon as you destroy all enemies (their number is displayed in red on the right below on the "Wave" sign during the onslaught of the wave), the modifier stops working and you are again given 60 seconds rest. With every wave, the game becomes heavier, so you should pay attention to pumping. For each kill of an enemy, you are awarded a certain number of points, coins, and you also replenish a certain amount of health.","В игре необходимо побеждать наплывающие волны врагов. Между волнами у вас есть 60 секунд, за которые вы можете купить улучшения в магазине [TAB] и там же выбрать режим стрельбы [ЛКМ] и умения [ПКМ]. Магазин доступен только между волнами. Во время волны со случайной вероятностью может быть применен модификатор. Модификатор может увеличить урон врагов, их скорость или вовсе отключить свет на арене. Усиливая врагов, модификаторы также их и ослабляют в чем-то. Как только вы уничтожите всех врагов (их количество отображается красным цветом справа снизу на табличкой "Волна" во время натиска волны), модификатор перестает действовать и вам дается опять 60 секунд отдыха. С каждой волной игра становится тяжелее, так что стоит уделить внимание прокачке. За каждое убийство врага вам начисляется определенное количество очков, монет а также вы восполняете определенное количество здоровья."
+HTP_9,"A little about the shooting modes. There are 3 shooting modes - Single, Burst and Shotgun.","Немного о режимах стрельбы. Есть 3 режима стрельбы - Одиночный, Очередь и "Дробовик"."
+HTP_10,"A single shot is quite powerful and accurate. Average rate of fire.","Одиночный выстрел довольно мощный и точный. Средняя скорострельность."
+HTP_11,"When shooting in burst, you fire 5 shots in a row, each of which is weaker than a single one. Has a small spread and a high rate of fire.","При стрельбе очередью вы производите подряд 5 выстрелов, каждый из которых слабее одиночного. Имеет небольшой разброс и высокую скорострельность."
+HTP_12,"The Shotgun fires 6 bullets with a wide spread. It is a very powerful weapon, but has a short firing range.",""Дробовик" стреляет 6 пулями с большим разбросом. Является очень мощным оружием, но имеет малую дальность стрельбы."
+HTP_13,"In addition to the shooting modes, you can also choose one of the three available skills - Shield, Dash and Grenade.","Помимо режимов стрельбы можно так же выбрать одно умение из трех доступных - Щит, Рывок и Граната."
+HTP_14,"When using a shield, you are protected from any damage for 1.5 seconds. The recovery time is 10 seconds.","При использовании щита вы защищены от любого урона 1,5 секунды. Время восстановления - 10 секунд."
+HTP_15,"When using a dash, the mech abruptly moves towards the sight, while while you are in a dash state, you are invulnerable. Recovery time - 5 seconds.","При использовании рывка мех резко перемещается в сторону прицела, при это пока вы находитесь в состоянии рывка, вы неуязвимы. Время восстановления - 5 секунд."
+HTP_16,"The grenade has a fairly high explosion power. Killing with a grenade also replenishes health. Deals damage equal to three times the damage player. The recovery time is 10 seconds.","Граната имеет довольно большую мощность взрыва. Убийство с гранаты так же восполняет здоровье. Наносит урон, равный трехкратному показателю урона игрока. Время восстановления - 10 секунд."
+HTP_17,"The arena contains a large number of moving walls. They can be effectively used, preventing opponents from reaching you. But be careful, if you don't manage your fur effectively, they can get in your way too.","На арене расположено большое количество движущихся стен. Их можно эффективно исспользовать, мешая противникам до вас добраться. Но будьте аккуратны, при неэффективном управлении мехом они могут помешать и вам."
+HTP_18,"Try to constantly move and do not let opponents catch up with you from several sides. Opponents will not stand still and will try with all their might to finish you off.","Старайтесь постоянно двигаться и не позволяйте противникам нагонять вас с нескольких сторон. Противники стоять на месте не станут и постараются всеми силами вас прикончить."
+HTP_19,"This is probably all you need to know for now. Additionally, you can find out from the tips on the scoring screen after death, or by experimenting yourself. If it's too hard, there's nothing wrong with lowering the difficulty. Good luck and pleasant game!","Пожалуй пока это все, что вам нужно знать. Дополнительно вы можете узнать из подсказок на экране подсчета очков после смерти, либо поэксперементировав самим. Если слишком сложно - нет ничего зазорного в том, чтобы понизить сложность. Удачи и приятной игры!"

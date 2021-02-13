@@ -1,0 +1,599 @@
+[gd_scene load_steps=26 format=2]
+
+[ext_resource path="res://Sprites/Pause_Time_Label.png" type="Texture" id=1]
+[ext_resource path="res://Fonts/Font3.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Sprites/HP_Label.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/HP_Bar_empty.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/HP_Bar_full.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Money_Label.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Score_Label.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Time_Label.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/HP_Bar_port_empty.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/HP_Bar_port_full.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/Wave_Label.png" type="Texture" id=11]
+[ext_resource path="res://Main_theme.tres" type="Theme" id=12]
+[ext_resource path="res://Scripts/HUD.gd" type="Script" id=13]
+[ext_resource path="res://Sprites/Minimap_Frame.png" type="Texture" id=14]
+[ext_resource path="res://Sprites/Minimap.png" type="Texture" id=15]
+[ext_resource path="res://Sprites/Player_icon.png" type="Texture" id=16]
+[ext_resource path="res://Sprites/Bonus_icon.png" type="Texture" id=17]
+[ext_resource path="res://Sprites/Enemy_icon.png" type="Texture" id=18]
+[ext_resource path="res://Sprites/Enemy_spawnpoint_icon.png" type="Texture" id=19]
+[ext_resource path="res://Sprites/AbilityLabel.png" type="Texture" id=20]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Fade"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("HealFade:color")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 1, 0 ), Color( 0, 0, 1, 0.0588235 ), Color( 0, 0, 1, 0.0588235 ), Color( 0, 0, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("LeftUpContainer/Health/CurHealth:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.2, 1.2 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Fade"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("DamageFade:color")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0, 0, 0 ), Color( 1, 0, 0, 0.117647 ), Color( 1, 0, 0, 0.117647 ), Color( 1, 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("LeftUpContainer/Health/CurHealth:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.2, 1.2 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Feedback"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("CurMoney:rect_scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.2, 1.2 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Feedback"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("CurScore:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 2, 2 ), Vector2( 2.2, 2.2 ), Vector2( 2, 2 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "TipsFades"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("TipsContainer:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.0784314 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.0784314 ) ]
+}
+
+[node name="HUDCanvas" type="CanvasLayer"]
+follow_viewport_enable = true
+script = ExtResource( 13 )
+
+[node name="HUD" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealFade" type="ColorRect" parent="HUD"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 1, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealFadeA" type="AnimationPlayer" parent="HUD"]
+anims/Fade = SubResource( 1 )
+
+[node name="DamageFade" type="ColorRect" parent="HUD"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 1, 0, 0, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DamageFadeA" type="AnimationPlayer" parent="HUD"]
+anims/Fade = SubResource( 2 )
+
+[node name="LeftUpContainer" type="VBoxContainer" parent="HUD"]
+margin_right = 150.0
+margin_bottom = 50.0
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Health" type="TextureRect" parent="HUD/LeftUpContainer"]
+margin_right = 150.0
+margin_bottom = 50.0
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Info" type="Label" parent="HUD/LeftUpContainer/Health"]
+margin_left = 7.0
+margin_top = 2.0
+margin_right = 147.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 140, 0 )
+custom_fonts/font = ExtResource( 2 )
+text = "HEALTH"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CurHealth" type="Label" parent="HUD/LeftUpContainer/Health"]
+margin_left = 9.0
+margin_top = 22.0
+margin_right = 79.0
+margin_bottom = 47.0
+rect_min_size = Vector2( 70, 0 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 0.529412, 0.529412, 1 )
+text = "16000"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MaxHealth" type="Label" parent="HUD/LeftUpContainer/Health"]
+margin_left = 79.0
+margin_top = 22.0
+margin_right = 148.0
+margin_bottom = 47.0
+rect_min_size = Vector2( 70, 0 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "20000"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureProgress" type="TextureProgress" parent="HUD/LeftUpContainer/Health"]
+margin_left = 150.0
+margin_right = 190.0
+margin_bottom = 40.0
+value = 80.0
+texture_under = ExtResource( 4 )
+texture_progress = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthBar" type="TextureProgress" parent="HUD/LeftUpContainer/Health"]
+margin_left = 182.0
+margin_right = 370.0
+margin_bottom = 40.0
+texture_under = ExtResource( 9 )
+texture_progress = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ability" type="TextureRect" parent="HUD/LeftUpContainer"]
+margin_top = 50.0
+margin_right = 150.0
+margin_bottom = 80.0
+texture = ExtResource( 20 )
+
+[node name="Label" type="Label" parent="HUD/LeftUpContainer/Ability"]
+margin_left = 9.0
+margin_top = 5.0
+margin_right = 129.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 132, 0 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.635294, 0.635294, 1, 1 )
+text = "ABILITY"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Money" type="TextureRect" parent="HUD/LeftUpContainer"]
+margin_top = 80.0
+margin_right = 150.0
+margin_bottom = 110.0
+texture = ExtResource( 6 )
+
+[node name="CurMoney" type="Label" parent="HUD/LeftUpContainer/Money"]
+margin_left = 9.0
+margin_top = 5.0
+margin_right = 79.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 70, 0 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 1, 0.392157, 1 )
+text = "23000"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MoneyA" type="AnimationPlayer" parent="HUD/LeftUpContainer/Money"]
+anims/Feedback = SubResource( 3 )
+
+[node name="RightUpContainer" type="VBoxContainer" parent="HUD"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -370.0
+margin_bottom = 50.0
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Score" type="TextureRect" parent="HUD/RightUpContainer"]
+margin_right = 370.0
+margin_bottom = 50.0
+texture = ExtResource( 7 )
+
+[node name="Info" type="Label" parent="HUD/RightUpContainer/Score"]
+margin_left = 16.0
+margin_top = 5.0
+margin_right = 86.0
+margin_bottom = 25.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.470588, 1, 1, 1 )
+text = "SCORE"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CurScore" type="Label" parent="HUD/RightUpContainer/Score"]
+margin_left = 160.0
+margin_top = 5.0
+margin_right = 260.0
+margin_bottom = 25.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.470588, 1, 1, 1 )
+text = "9999999"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScoreA" type="AnimationPlayer" parent="HUD/RightUpContainer/Score"]
+anims/Feedback = SubResource( 4 )
+
+[node name="Time" type="TextureRect" parent="HUD/RightUpContainer"]
+margin_top = 50.0
+margin_right = 370.0
+margin_bottom = 100.0
+texture = ExtResource( 8 )
+
+[node name="Info" type="Label" parent="HUD/RightUpContainer/Time"]
+margin_left = 65.0
+margin_top = 5.0
+margin_right = 137.0
+margin_bottom = 25.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.470588, 1, 0.470588, 1 )
+text = "TIME"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CurTime" type="Label" parent="HUD/RightUpContainer/Time"]
+margin_left = 215.0
+margin_top = 5.0
+margin_right = 290.0
+margin_bottom = 25.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.470588, 1, 0.470588, 1 )
+text = "456:34"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DownContainer" type="VBoxContainer" parent="HUD"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -324.0
+margin_top = -100.0
+rect_min_size = Vector2( 322, 100 )
+custom_constants/separation = 0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PauseTimer" type="HBoxContainer" parent="HUD/DownContainer"]
+margin_right = 324.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 322, 50 )
+alignment = 2
+
+[node name="PauseTimer" type="TextureRect" parent="HUD/DownContainer/PauseTimer"]
+margin_left = 192.0
+margin_right = 324.0
+margin_bottom = 50.0
+texture = ExtResource( 1 )
+
+[node name="CurPauseTime" type="Label" parent="HUD/DownContainer/PauseTimer/PauseTimer"]
+margin_left = 60.0
+margin_right = 90.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 30, 25 )
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "60"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Wave" type="TextureRect" parent="HUD/DownContainer"]
+margin_top = 50.0
+margin_right = 324.0
+margin_bottom = 100.0
+texture = ExtResource( 11 )
+
+[node name="Info" type="Label" parent="HUD/DownContainer/Wave"]
+margin_left = 40.0
+margin_right = 112.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 80, 25 )
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.866667, 0.447059, 1, 1 )
+text = "WAVE"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CurWave" type="Label" parent="HUD/DownContainer/Wave"]
+margin_left = 200.0
+margin_right = 260.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 60, 25 )
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.866667, 0.447059, 1, 1 )
+text = "9999"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TipsContainer" type="Control" parent="HUD"]
+modulate = Color( 1, 1, 1, 0.0784314 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -300.0
+margin_top = -190.0
+margin_right = 300.0
+margin_bottom = 190.0
+rect_min_size = Vector2( 600, 380 )
+theme = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PressEnterPanel" type="Panel" parent="HUD/TipsContainer"]
+modulate = Color( 1, 1, 1, 0.392157 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -150.0
+margin_right = 150.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 300, 50 )
+rect_scale = Vector2( 2, 2 )
+rect_pivot_offset = Vector2( 150, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PressEnterLabel" type="Label" parent="HUD/TipsContainer"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -150.0
+margin_right = 150.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 300, 50 )
+rect_scale = Vector2( 2, 2 )
+rect_pivot_offset = Vector2( 150, 0 )
+text = "PRESS_START"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PressTABPanel" type="Panel" parent="HUD/TipsContainer"]
+modulate = Color( 1, 1, 1, 0.392157 )
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -150.0
+margin_top = -280.0
+margin_right = 150.0
+margin_bottom = -230.0
+rect_min_size = Vector2( 300, 50 )
+rect_scale = Vector2( 2, 2 )
+rect_pivot_offset = Vector2( 150, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PressTABLabel" type="Label" parent="HUD/TipsContainer"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -150.0
+margin_top = -280.0
+margin_right = 150.0
+margin_bottom = -230.0
+rect_min_size = Vector2( 300, 50 )
+rect_scale = Vector2( 2, 2 )
+rect_pivot_offset = Vector2( 150, 0 )
+text = "PRESS_SHOP"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Minimap" type="GridContainer" parent="HUD"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -198.0
+margin_right = 300.0
+margin_bottom = 102.0
+rect_scale = Vector2( 0.66, 0.66 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MinimapFrame" type="TextureRect" parent="HUD/Minimap"]
+margin_right = 300.0
+margin_bottom = 300.0
+texture = ExtResource( 14 )
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD/Minimap/MinimapFrame"]
+show_behind_parent = true
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 288.0
+margin_bottom = 288.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Minimap" type="TextureRect" parent="HUD/Minimap/MinimapFrame/MarginContainer"]
+modulate = Color( 1, 1, 1, 0.501961 )
+show_behind_parent = true
+margin_right = 276.0
+margin_bottom = 276.0
+texture = ExtResource( 15 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Markers" type="Node2D" parent="HUD/Minimap/MinimapFrame/MarginContainer"]
+
+[node name="Player" type="Sprite" parent="HUD/Minimap/MinimapFrame/MarginContainer"]
+position = Vector2( 138, 138 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 16 )
+
+[node name="Enemy" type="Sprite" parent="HUD/Minimap/MinimapFrame/MarginContainer"]
+visible = false
+scale = Vector2( 2, 2 )
+z_index = 2
+texture = ExtResource( 18 )
+
+[node name="Bonus" type="Sprite" parent="HUD/Minimap/MinimapFrame/MarginContainer"]
+visible = false
+scale = Vector2( 2, 2 )
+z_index = 3
+texture = ExtResource( 17 )
+
+[node name="EnemySpawn" type="Sprite" parent="HUD/Minimap/MinimapFrame/MarginContainer"]
+visible = false
+modulate = Color( 1, 1, 1, 0.784314 )
+scale = Vector2( 2, 2 )
+z_index = 1
+texture = ExtResource( 19 )
+
+[node name="TipsContainerA" type="AnimationPlayer" parent="HUD"]
+playback_speed = 0.5
+method_call_mode = 1
+anims/TipsFades = SubResource( 5 )
